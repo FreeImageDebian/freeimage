@@ -25,6 +25,7 @@
 // Local test functions
 // ----------------------------------------------------------
 
+#if 0
 void testJPEGTransform(const char *src_file) {
 	BOOL bResult;
 	BOOL perfect;
@@ -193,11 +194,13 @@ void testJPEGSameFile(const char *src_file) {
 	bResult = FreeImage_JPEGTransform("test.jpg", "test.jpg", FIJPEG_OP_ROTATE_270, perfect);
 	assert(bResult);
 }
+#endif
 
 // Main test function
 // ----------------------------------------------------------
 
 void testJPEG() {
+#if 0
 	const char *src_file = "exif.jpg";
 
 	printf("testJPEG (should throw exceptions) ...\n");
@@ -213,4 +216,5 @@ void testJPEG() {
 
 	// using the same file for src & dst is allowed
 	testJPEGSameFile(src_file);
+#endif
 }
