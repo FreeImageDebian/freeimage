@@ -20,8 +20,6 @@
 // Use at your own risk!
 // ==========================================================
 
-#include "../LibTIFF4/tiffiop.h"
-
 #include "FreeImage.h"
 #include "Utilities.h"
 
@@ -31,6 +29,7 @@
 
 static int s_format_id;
 
+#if 0
 // ==========================================================
 //   Constant/Macro declarations
 // ==========================================================
@@ -192,6 +191,7 @@ copyFaxFile(FreeImageIO *io, fi_handle handle, TIFF* tifin, uint32_t xsize, int 
 
 	return (row);
 }
+#endif
 
 
 // ==========================================================
@@ -229,7 +229,7 @@ SupportsExportDepth(int depth) {
 }
 
 // ----------------------------------------------------------
-
+#if 0
 static FIBITMAP * DLL_CALLCONV
 Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 	TIFF *faxTIFF = NULL;
@@ -406,6 +406,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 	return dib;
 
 }
+#endif
 
 // ==========================================================
 //   Init
@@ -423,7 +424,7 @@ InitG3(Plugin *plugin, int format_id) {
 	plugin->close_proc = NULL;
 	plugin->pagecount_proc = NULL;
 	plugin->pagecapability_proc = NULL;
-	plugin->load_proc = Load;
+	plugin->load_proc = NULL;
 	plugin->save_proc = NULL;
 	plugin->validate_proc = NULL;
 	plugin->mime_proc = MimeType;

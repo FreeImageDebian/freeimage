@@ -7,12 +7,7 @@ echo "VER_MAJOR = 3" > fipMakefile.srcs
 echo "VER_MINOR = 19.0" >> fipMakefile.srcs
 
 echo -n "SRCS = " >> fipMakefile.srcs
-for DIR in $DIRLIST; do
-	VCPRJS=`echo $DIR/*.2017.vcxproj`
-	if [ "$VCPRJS" != "$DIR/*.2017.vcxproj" ]; then
-		egrep 'ClCompile Include=.*\.(c|cpp)' $DIR/*.2017.vcxproj | cut -d'"' -f2 | tr '\\' '/' | awk '{print "'$DIR'/"$0}' | tr '\r\n' '  ' | tr -s ' ' >> fipMakefile.srcs
-	fi
-done
+find Wrapper/FreeImagePlus/src -name '*.cpp' -print | LC_ALL=C sort | xargs echo -n >> fipMakefile.srcs
 echo >> fipMakefile.srcs
 
 echo -n "INCLUDE =" >> fipMakefile.srcs

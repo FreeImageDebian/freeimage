@@ -6,16 +6,11 @@ echo "VER_MAJOR = 3" > Makefile.srcs
 echo "VER_MINOR = 19.0" >> Makefile.srcs
 
 echo -n "SRCS = " >> Makefile.srcs
-for DIR in $DIRLIST; do
-	VCPRJS=`echo $DIR/*.2017.vcxproj`
-	if [ "$VCPRJS" != "$DIR/*.2017.vcxproj" ]; then
-		egrep 'ClCompile Include=.*\.(c|cpp)' $DIR/*.2017.vcxproj | cut -d'"' -f2 | tr '\\' '/' | awk '{print "'$DIR'/"$0}' | tr '\r\n' '  ' | tr -s ' ' >> Makefile.srcs
-	fi
-done
+find Source -name '*.c' -or -name '*.cpp' -not -name 'JPEGTransform.cpp' | LC_ALL=C sort | xargs echo -n >> Makefile.srcs
 echo >> Makefile.srcs
 
 echo -n "INCLS = " >> Makefile.srcs
-find . -name "*.h" -print | xargs echo >> Makefile.srcs
+find Source -name '*.h' | LC_ALL=C sort | xargs echo -n >> Makefile.srcs
 echo >> Makefile.srcs
 
 echo -n "INCLUDE =" >> Makefile.srcs
